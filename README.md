@@ -894,7 +894,7 @@ Get trades for a specific account and symbol.
 
 Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
-symbol | STRING | NO |
+symbol | STRING | YES |
 startTime | LONG | NO |
 endTime | LONG | NO |
 fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades.
