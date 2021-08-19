@@ -889,24 +889,12 @@ Get trades for a specific account and symbol.
 
 **Weight:**
 5 with symbol;40 when the symbol parameter is omitted
-=======
-### ETF net value  (MARKET_DATA)
-
-```
-GET /api/v1/etf/net-value/{symbol}  (HMAC SHA256)
-```
-
-Get trades for a specific account and symbol.
-
-**Weight:**
-1 
-
 
 **Parameters:**
 
 Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
-symbol | STRING | YES |
+symbol | STRING | NO |
 startTime | LONG | NO |
 endTime | LONG | NO |
 fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades.
@@ -936,7 +924,22 @@ Otherwise most recent orders are returned.
   }
 ]
 ```
-=======
+### ETF net value  (MARKET_DATA)
+
+```
+GET /api/v1/etf/net-value/{symbol}  (HMAC SHA256)
+```
+
+Get etf net value for a specific symbol.
+
+**Weight:**
+1 
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+symbol | STRING | YES |
 
 **Notes:**
 
