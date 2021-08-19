@@ -1,4 +1,4 @@
-# Public Rest API for Bitrue (2018-10-18)
+# Public Rest API for Bitrue (2021-08-18)
 # General API Information
 * The base endpoint is: **https://www.bitrue.com**
 * All endpoints return either a JSON object or array.
@@ -880,6 +880,7 @@ Otherwise most recent orders are returned.
 ```
 
 
+
 ### Account trade list (USER_DATA)
 ```
 GET /api/v2/myTrades  (HMAC SHA256)
@@ -888,6 +889,18 @@ Get trades for a specific account and symbol.
 
 **Weight:**
 5 with symbol;40 when the symbol parameter is omitted
+=======
+### ETF net value  (MARKET_DATA)
+
+```
+GET /api/v1/etf/net-value/{symbol}  (HMAC SHA256)
+```
+
+Get trades for a specific account and symbol.
+
+**Weight:**
+1 
+
 
 **Parameters:**
 
@@ -923,3 +936,28 @@ Otherwise most recent orders are returned.
   }
 ]
 ```
+=======
+
+**Notes:**
+
+path variable symbol should set symbol ,for example 
+
+/api/v1/etf/net-value/xrp3lusdt
+
+**Response:**
+
+```javascript
+{
+"id": 5916134,
+"symbol": "xrp3lusdt", #ETF 币对名称
+"futruesPrice": 1.1786,  #合约价格 
+"netValue": 1.079792003418094,   # 净值 
+"beginNetValue": 1.0075782872361934,  #期初净值
+"beginFutruesPrice": 1.1511,  #期初净值对应的合约价格
+"seqId": 182101153490862080,  # 净值记录唯一id 
+"beginTs": 1629144393980, # 期初时间戳
+"ts": 1629147837595. # 数据生成的时间戳 
+}
+```
+
+
