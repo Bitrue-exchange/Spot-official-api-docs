@@ -392,7 +392,7 @@ limit | INT | NO | Default 100; max 1000.
     "qty": "12.00000000",
     "time": 1499865549590,
     "isBuyerMaker": true, 
-    "isBestMatch": true  //预留
+    "isBestMatch": true 
   }
 ]
 ```
@@ -423,7 +423,7 @@ fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades.
     "qty": "12.00000000",
     "time": 1499865549590,
     "isBuyerMaker": true,
-    "isBestMatch": true   //预留
+    "isBestMatch": true  
   }
 ]
 ```
