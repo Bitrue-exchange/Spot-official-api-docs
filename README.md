@@ -1,4 +1,4 @@
-# Public Rest API for Bitrue (2021-08-18)
+# Public Rest API for Bitrue (2021-09-30)
 # General API Information
 * The base endpoint is: **https://www.bitrue.com**
 * All endpoints return either a JSON object or array.
@@ -11,7 +11,7 @@
   It is important to **NOT** treat this as a failure operation; the execution status is
   **UNKNOWN** and could have been a success.
 * Any endpoint can return an ERROR; the error payload is as follows:
-```javascript
+```json
 {
   "code": -1121,
   "msg": "Invalid symbol."
@@ -237,7 +237,7 @@ Test connectivity to the Rest API.
 NONE
 
 **Response:**
-```javascript
+```json
 {}
 ```
 
@@ -254,7 +254,7 @@ Test connectivity to the Rest API and get the current server time.
 NONE
 
 **Response:**
-```javascript
+```json
 {
   "serverTime": 1499827319559
 }
@@ -273,7 +273,7 @@ Current exchange trading rules and symbol information
 NONE
 
 **Response:**
-```javascript
+```json
 {
   "timezone": "UTC",
   "serverTime": 1508631584636,
@@ -298,16 +298,16 @@ NONE
     "symbol": "ETHBTC",
     "status": "TRADING",
     "baseAsset": "ETH",
-    "baseAssetPrecision": 8,???
+    "baseAssetPrecision": 8,
     "quoteAsset": "BTC",
     "quotePrecision": 8,
     "orderTypes": ["LIMIT", "MARKET"],
-    "icebergAllowed": false,  ???
-    "filters": [{   ??
-      "filterType": "PRICE_FILTER", ??
-      "minPrice": "0.00000100", ??
-      "maxPrice": "100000.00000000", ??
-      "tickSize": "0.00000100" ??
+    "icebergAllowed": false,
+    "filters": [{
+      "filterType": "PRICE_FILTER",
+      "minPrice": "0.00000100",
+      "maxPrice": "100000.00000000",
+      "tickSize": "0.00000100"
     }, {
       "filterType": "LOT_SIZE",
       "minQty": "0.00100000",
@@ -347,7 +347,7 @@ limit | INT | NO | Default 100; max 1000. Valid limits:[5, 10, 20, 50, 100, 500,
 **Caution:** setting limit=0 can return a lot of data.
 
 **Response:**
-```javascript
+```json
 {
   "lastUpdateId": 1027024,
   "bids": [
@@ -384,7 +384,7 @@ symbol | STRING | YES |
 limit | INT | NO | Default 100; max 1000.
 
 **Response:**
-```javascript
+```json
 [
   {
     "id": 28457,
@@ -415,7 +415,7 @@ limit | INT | NO | Default 100; max 1000.
 fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades.
 
 **Response:**
-```javascript
+```json
 [
   {
     "id": 28457,
@@ -452,7 +452,7 @@ limit | INT | NO | Default 100; max 1000.
 * If fromId, startTime, and endTime are not sent, the most recent aggregate trades will be returned.
 
 **Response:**
-```javascript
+```json
 [
   {
     "a": 26129,         // Aggregate tradeId
@@ -487,7 +487,7 @@ symbol | STRING | NO |
 1 for a single symbol; **40** when the symbol parameter is omitted
 
 **Response:**
-```javascript
+```json
 {
   "symbol": "BNBBTC",
   "priceChange": "-94.99999800",
@@ -511,7 +511,7 @@ symbol | STRING | NO |
 }
 ```
 OR
-```javascript
+```json
 [
   {
     "symbol": "BNBBTC",
@@ -554,7 +554,7 @@ symbol | STRING | YES |
 
 
 **Response:**
-```javascript
+```json
 {
   "symbol": "LTCBTC",
   "price": "4.00000200"
@@ -579,7 +579,7 @@ Name | Type | Mandatory | Description
 symbol | STRING | YES |
 
 **Response:**
-```javascript
+```json
 {
   "symbol": "LTCBTC",
   "bidPrice": "4.00000000",
@@ -609,9 +609,9 @@ type | ENUM | YES |
 timeInForce | ENUM | NO |
 quantity | DECIMAL | YES |
 price | DECIMAL | NO |
-newClientOrderId | STRING | NO | A unique id for the order. Automatically generated if not sent. **Reserved**
-stopPrice | DECIMAL | NO |   **Reserved**
-icebergQty | DECIMAL | NO | **Reserved**
+newClientOrderId | STRING | NO | A unique id for the order. Automatically generated if not sent. 
+stopPrice | DECIMAL | NO |   
+icebergQty | DECIMAL | NO | 
 recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
@@ -623,11 +623,11 @@ Type | Additional mandatory parameters
 `MARKET` | `quantity`
 
 **Response :**
-```javascript
+```json
 {
   "symbol": "BTCUSDT",
   "orderId": 28,
-  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP", **Reserved**
+  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",
   "transactTime": 1507725176595
 }
 ```
@@ -647,29 +647,29 @@ Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
 symbol | STRING | YES |
 orderId | LONG | YES |
-origClientOrderId | STRING | NO | **Reserved**
+origClientOrderId | STRING | NO | 
 recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 **Response:**
-```javascript
+```json
 {
   "symbol": "LTCBTC",
   "orderId": 1,
-  "clientOrderId": "myOrder1",  **Reserved**
+  "clientOrderId": "myOrder1",  
   "price": "0.1",
-  "origQty": "1.0", **Reserved**
+  "origQty": "1.0", 
   "executedQty": "0.0", 
-  "cummulativeQuoteQty": "0.0", **Reserved**
+  "cummulativeQuoteQty": "0.0", 
   "status": "NEW",
-  "timeInForce": "GTC", **Reserved**
+  "timeInForce": "GTC", 
   "type": "LIMIT",
   "side": "BUY",
-  "stopPrice": "0.0",  **Reserved**
-  "icebergQty": "0.0", **Reserved**
+  "stopPrice": "0.0",  
+  "icebergQty": "0.0", 
   "time": 1499827319559,
   "updateTime": 1499827319559,
-  "isWorking": true  **Reserved**
+  "isWorking": true  
 }
 ```
 
@@ -688,19 +688,19 @@ Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
 symbol | STRING | YES |
 orderId | LONG | NO |
-origClientOrderId | STRING | NO |  **Reserved**
-newClientOrderId | STRING | NO |  **Reserved**
+origClientOrderId | STRING | NO |  
+newClientOrderId | STRING | NO |  
 recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 
 **Response:**
-```javascript
+```json
 {
   "symbol": "LTCBTC",
-  "origClientOrderId": "myOrder1",  **Reserved**
+  "origClientOrderId": "myOrder1",  
   "orderId": 1,
-  "clientOrderId": "cancelMyOrder1"  **Reserved**
+  "clientOrderId": "cancelMyOrder1"  
 }
 ```
 
@@ -722,25 +722,25 @@ timestamp | LONG | YES |
 
 
 **Response:**
-```javascript
+```json
 [
   {
     "symbol": "LTCBTC",
     "orderId": 1,
     "clientOrderId": "myOrder1",
     "price": "0.1",
-    "origQty": "1.0",  **Reserved**
-    "executedQty": "0.0",  **Reserved**
-    "cummulativeQuoteQty": "0.0",  **Reserved**
+    "origQty": "1.0",  
+    "executedQty": "0.0",  
+    "cummulativeQuoteQty": "0.0",  
     "status": "NEW",
-    "timeInForce": "GTC",  **Reserved**
+    "timeInForce": "GTC",  
     "type": "LIMIT",
     "side": "BUY",
-    "stopPrice": "0.0", **Reserved**
-    "icebergQty": "0.0",  **Reserved**
+    "stopPrice": "0.0", 
+    "icebergQty": "0.0",  
     "time": 1499827319559,
     "updateTime": 1499827319559,
-    "isWorking": true  **Reserved**
+    "isWorking": true  
   }
 ]
 ```
@@ -770,7 +770,7 @@ timestamp | LONG | YES |
 * If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
 
 **Response:**
-```javascript
+```json
 [
   {
     "symbol": "LTCBTC",
@@ -810,15 +810,15 @@ recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 **Response:**
-```javascript
+```json
 {
-  "makerCommission": 15,   **Reserved**
-  "takerCommission": 15,  **Reserved**
-  "buyerCommission": 0,   **Reserved**
-  "sellerCommission": 0,   **Reserved**
-  "canTrade": true,   **Reserved**
-  "canWithdraw": true,  **Reserved**
-  "canDeposit": true,  **Reserved**
+  "makerCommission": 15,   
+  "takerCommission": 15,  
+  "buyerCommission": 0,   
+  "sellerCommission": 0,   
+  "canTrade": true,   
+  "canWithdraw": true,  
+  "canDeposit": true,  
   "updateTime": 123456789,
   "balances": [
     {
@@ -861,7 +861,7 @@ timestamp | LONG | YES |
 Otherwise most recent orders are returned.
 
 **Response:**
-```javascript
+```json
 [
   {
     "symbol": "BNBBTC",
@@ -874,7 +874,7 @@ Otherwise most recent orders are returned.
     "time": 1499865549590,
     "isBuyer": true,
     "isMaker": false,
-    "isBestMatch": true    **Reserved**
+    "isBestMatch": true    
   }
 ]
 ```
@@ -907,7 +907,7 @@ timestamp | LONG | YES |
 Otherwise most recent orders are returned.
 
 **Response:**
-```javascript
+```json
 [
   {
     "symbol": "BNBBTC",
@@ -920,7 +920,7 @@ Otherwise most recent orders are returned.
     "time": 1499865549590,
     "isBuyer": true,
     "isMaker": false,
-    "isBestMatch": true    **Reserved**
+    "isBestMatch": true    
   }
 ]
 ```
@@ -949,18 +949,197 @@ path variable symbol should set symbol ,for example
 
 **Response:**
 
-```javascript
+```json
 {
 "id": 5916134,
-"symbol": "xrp3lusdt", #ETF symbol name 
-"futruesPrice": 1.1786,  # contract price
-"netValue": 1.079792003418094,   # net value 
-"beginNetValue": 1.0075782872361934, net value on the beginning
-"beginFutruesPrice": 1.1511,  # contract price on the beginning
-"seqId": 182101153490862080,  # sequence id 
-"beginTs": 1629144393980, # timestamp on the beginning
-"ts": 1629147837595. # timestamp of this data 
+"symbol": "xrp3lusdt", //ETF symbol name 
+"futruesPrice": 1.1786,  // contract price
+"netValue": 1.079792003418094,   // net value 
+"beginNetValue": 1.0075782872361934, // net value on the beginning
+"beginFutruesPrice": 1.1511,  // contract price on the beginning
+"seqId": 182101153490862080,  // sequence id 
+"beginTs": 1629144393980, // timestamp on the beginning
+"ts": 1629147837595 // timestamp of this data 
 }
 ```
 
+### Withdraw commit  (WITHDRAW_DATA)
 
+```
+POST /api/v1/withdraw/commit
+```
+
+Commit one withdraw request.
+
+**Weight:**
+1
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+coin | STRING | YES | Coin name without chain name.
+amount | NUMBER | YES | How much coins to withdraw.
+addressTo | STRING | YES | Which address to withdraw.
+chainName | STRING | YES | Which chain to withdraw for this coin.
+addressMark | STRING | NO | Mark of address.
+addrType | STRING | NO | Type of address.
+tag | STRING | NO | Tag for address.
+
+**Notes:**
+
+This method needs the API withdraw privilege and you MUST set limit IP for this API Key and you MUST set withdraw address white list before.
+
+**Response:**
+
+```json
+{
+    "code": 200,
+    "msg": "succ",
+    "data": {
+        "msg": null,
+        "amount": 1000,
+        "fee": 1,
+        "ctime": null,
+        "coin": "usdt_erc20",
+        "addressTo": "0x2edfae3878d7b6db70ce4abed177ab2636f60c83"
+    }
+}
+```
+
+ErrorCode | Description
+------------ | ------------ 
+2 | Parameter error
+6 | Withdraw amount too less
+19 | Insufficient balance
+32 | User auth error
+110049 | Withdraw locked
+110050 | Withdraw locked
+110051 | Withdraw locked
+110054 | Withdraw locked
+110055 | Withdraw locked
+110056 | Withdraw locked
+110057 | Withdraw locked
+966000 | Ip limit
+966001 | No privileges
+999503 | Withdraw fee error
+999504 | Withdraw limit
+999505 | Withdraw limit
+999508 | Withdraw locked
+999509 | Not deposit found
+999512 | Withdraw tag error
+999513 | Withdraw address error
+999901 | Coin chain error
+999902 | Account balance error
+
+### Withdraw history  (WITHDRAW_DATA)
+
+```
+GET /api/v1/withdraw/history
+```
+
+Query withdraw history
+
+**Weight:**
+1
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+coin | STRING | YES | Coin name without chain name.
+status | NUMBER | NO | 0: init 5: finished 6: canceled. Default 0.
+offset | NUMBER | NO | Which offset to start. Default 0.
+limit | NUMBER | NO | Limit data to query. Default 10. Max 1000.
+startTime | NUMBER | NO | Start time to query. Timestamp in ms. 
+endTime | NUMBER | NO | End time to query. Timestamp in ms.
+
+**Notes:**
+
+The other status means your withdraw request is in a flow.
+
+**Response:**
+
+```json
+{
+    "code": 200,
+    "msg": "succ",
+    "data": [
+                {
+                    "id": 183745,
+                    "symbol": "usdt_erc20",
+                    "amount": "8.4000000000000000",
+                    "fee": "1.6000000000000000",
+                    "payAmount": "0.0000000000000000",
+                    "createdAt": 1595336441000,
+                    "updatedAt": 1595336576000,
+                    "addressFrom": "",
+                    "addressTo": "0x2edfae3878d7b6db70ce4abed177ab2636f60c83",
+                    "txid": "",
+                    "confirmations": 0,
+                    "status": 6,
+                    "tagType": null
+                }
+            ]
+}
+``` 
+
+### Deposit history  (WITHDRAW_DATA)
+
+```
+GET /api/v1/deposit/history
+```
+
+Query deposit history
+
+**Weight:**
+1
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+coin | STRING | YES | Coin name without chain name.
+status | NUMBER | NO | 0: init 1: finished. Default 0.
+offset | NUMBER | NO | Which offset to start. Default 0.
+limit | NUMBER | NO | Limit data to query. Default 10. Max 1000.
+startTime | NUMBER | NO | Start time to query. Timestamp in ms. 
+endTime | NUMBER | NO | End time to query. Timestamp in ms.
+
+
+**Response:**
+
+```json
+{
+    "code": 200,
+    "msg": "succ",
+    "data": [
+                {
+                    "symbol": "XRP",
+                    "amount": "261.3361000000000000",
+                    "fee": "0.0E-15",
+                    "createdAt": 1548816979000,
+                    "updatedAt": 1548816999000,
+                    "addressFrom": "",
+                    "addressTo": "raLPjTYeGezfdb6crXZzcC8RkLBEwbBHJ5_18113641",
+                    "txid": "86D6EB68A7A28938BCE06BD348F8C07DEF500C5F7FE92069EF8C0551CE0F2C7D",
+                    "confirmations": 8,
+                    "status": 1,
+                    "tagType": "Tag"
+                },
+                {
+                    "symbol": "XRP",
+                    "amount": "20.0000000000000000",
+                    "fee": "0.0E-15",
+                    "createdAt": 1544669393000,
+                    "updatedAt": 1544669413000,
+                    "addressFrom": "",
+                    "addressTo": "raLPjTYeGezfdb6crXZzcC8RkLBEwbBHJ5_18113641",
+                    "txid": "515B23E1F9864D3AF7F5B4C4FCBED784BAE861854FAB95F4031922B6AAEFC7AC",
+                    "confirmations": 7,
+                    "status": 1,
+                    "tagType": "Tag"
+                }
+            ]
+}
+``` 
