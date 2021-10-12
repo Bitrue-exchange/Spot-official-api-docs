@@ -1,4 +1,4 @@
-# Public Rest API for Bitrue (2021-09-30)
+# Public Rest API for Bitrue (2021-10-12)
 # General API Information
 * The base endpoint is: **https://www.bitrue.com**
 * All endpoints return either a JSON object or array.
@@ -317,6 +317,16 @@ NONE
       "filterType": "MIN_NOTIONAL",
       "minNotional": "0.00100000"
     }]
+  }],
+  "coins": [{
+    "coin":"btr",
+    "coinFulName":"Bitrue Coin",
+    "enableWithdraw":true,
+    "enableDeposit":true,
+    "chains":["ERC20","BEP20"],
+    "withdrawFee":"161.0",
+    "minWithdraw":"1961.067474",
+    "maxWithdraw":"88888888"
   }]
 }
 ```
