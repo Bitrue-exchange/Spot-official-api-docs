@@ -1,6 +1,6 @@
 # Public Rest API for Bitrue (2021-10-12)
 # General API Information
-* The base endpoint is: **https://www.bitrue.com**
+* The base endpoint is: **https://openapi.bitrue.com**
 * All endpoints return either a JSON object or array.
 * All time and timestamp related fields are in milliseconds.
 * All data timestamp:GMT +8
