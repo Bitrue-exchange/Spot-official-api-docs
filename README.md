@@ -1092,7 +1092,7 @@ The other status means your withdraw request is in a flow.
                 }
             ]
 }
-``` 
+```
 
 ### Deposit history  (WITHDRAW_DATA)
 
@@ -1152,4 +1152,294 @@ endTime | NUMBER | NO | End time to query. Timestamp in ms.
                 }
             ]
 }
+```
+
+# # User Data Streams 
+
+- The base API endpoint is: https://open.bitrue.com
+- USER_STREAM : Security Type, Endpoint requires sending a valid API-Key.
+- API-keys are passed into the API via the X-MBX-APIKEY header.
+- API-keys are case sensitive.
+- A User Data Stream listenKey is valid for 60 minutes after creation.
+- Doing a PUT on a listenKey will extend its validity for 60 minutes.
+- Doing a DELETE on a listenKey will close the stream and invalidate the listenKey.
+- Doing a POST on an account with an active listenKey will return the currently active listenKey and extend its validity for 60 minutes.
+- The base websocket endpoint is: wss://wsapi.bitrue.com
+- User Data Streams are accessed at /stream?listenKey=<your listenKey> 
+- A single connection to wsapi.bitrue.com is only valid for 24 hours; expect to be disconnected at the 24 hour mark
+
+Error Codes
+
+Errors consist of two parts: an error code and a message. Codes are universal, but messages can vary.
+
+200   SUCCESS
+
+* 200 for success,others are error codes.
+
+503   SERVICE_ERROR
+
+* An unknown error occurred while processing the request.
+
+-1022 INVALID_API_KEY
+
+* You are not authorized to execute this request.
+
+-1102 MANDATORY_PARAM_EMPTY_OR_MALFORMED
+
+* A mandatory parameter was not sent, was empty/null, or malformed.
+
+-1150 INVALID_LISTEN_KEY
+
+* This listenKey does not exist.
+
+## ListenKey
+
+**CREATE A LISTENKEY (USER_STREAM)**
+
+**url**
+
+`POST /poseidon/api/v1/listenKey`
+
+Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active listenKey, that listenKey will be returned and its validity will be extended for 60 minutes.
+
+**Response:**
+
+```json
+{
+  "msg": "succ",
+  "code": 200,
+  "data":
+  {
+    "listenKey": "ac3abbc8ac18f7977df42de27ab0c87c1f4ea3919983955d2fb5786468ccdb07"
+  }
+}
+```
+
+**Data Source**: Memory
+
+
+#### Ping/Keep-alive a ListenKey (USER_STREAM)
+
+**url**
+
+`PUT /poseidon/api/v1/listenKey/{listenKey}`
+Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
+
+**Response:**
+
+```json
+{
+  "msg": "succ",
+  "code": 200
+}
+```
+
+**Data Source**: Memory
+
+
+#### Close a ListenKey (USER_STREAM)
+
+**url:**
+
+DELETE /poseidon/api/v1/listenKey/{listenKey}
+
+Close out a user data stream.
+
+**Response:**
+
+```json
+{
+  "msg": "succ",
+  "code": 200
+}
+```
+
+**Data Source**: Memory
+
+
+## keep-alive 
+
+you should send pong message within 10 minutes
+**pong：**
+
 ``` 
+{"event":"pong","ts":"1635221621062"}
+```
+
+
+## Order Update
+
+Orders are updated with the Order Event 
+**subscribe：**
+
+``` 
+{"event":"sub","params":{"channel":"user_order_update"}}
+```
+
+**response：**
+
+sub success :
+
+``` 
+{"channel":"user_order_update","event_rep":"subed","status":"ok","ts":1623381851178}
+```
+
+order event :
+
+``` 
+{
+  "e": "executionReport",        // Event type
+  "I": "209818131719847936",     // Event ID
+  "E": 1499405658658,            // Event time
+  "u": 123456,                   // UID
+  "s": "ETHBTC",                 // Symbol
+  "c": "mUvoqJxFIILMdfAW5iGSOW", // Client order ID
+  "S": "BUY",                    // Side
+  "o": "LIMIT",                  // Order type
+  "q": "1.00000000",             // Order quantity
+  "p": "0.10264410",             // Order price
+  "x": "NEW",                    // order event
+  "X": "NEW",                    // Current order status
+  "i": 4293153,                  // Order ID
+  "l": "0.00000000",             // Last executed quantity
+  "L": "0.00000000",             // Last executed price
+  "n": "0",                      // Commission amount
+  "N": null,                     // Commission asset
+  "T": 1499405658657,            // Trade time
+  "t": -1,                       // Trade ID
+  "O": 1499405658657,            // Order creation time
+  "z": "0.00000000",              // Cumulative filled quantity
+  "Y": "0.00000000",             // Cumulative transacted amount (i.e. Price * Qty)
+}
+```
+
+**unsubscribe：**
+
+``` 
+{"event":"unsub","params":{"channel":"user_order_update"}}
+```
+
+**response：**
+
+``` 
+{"channel":"user_order_update","status":"ok","ts":1623381851178}
+```
+
+**example:**
+
+subscribe
+
+``` 
+{"event":"sub","params":{"channel":"user_order_update"}}
+```
+
+unsubscribe
+
+``` 
+{"event":"unsub","params":{"channel":"user_order_update"}}
+```
+
+## balance update
+
+balance are updated with the Balance Event 
+**subscribe：**
+
+``` 
+{"event":"sub","params":{"channel":"user_balance_update"}}
+```
+
+**response：**
+
+``` 
+{
+    "e":"BALANCE",  #event name 
+    "x":"OutboundAccountPositionOrderEvent", #event type  
+    "E":1635515839203,  #event time 
+    "I":208810488108744704,  #event id 
+    "i":1635515839203,  # ignore 
+    "B":[
+        {
+            "a":"btr",        # assert name 
+            "F":"9999999.9658620755200000",  # balance 
+            "T":1635515839000,  # balance update time 
+            "f":"2.8125000000000000",  # balance  Delta
+            "L":"0.0000000000000000", # lock balance  
+            "l":"-2.8125000000000000", # lock balance  Delta 
+            "t":1635515839000 #  lock balance  update time 
+        },
+        {
+            "a":"usdt",
+            "F":"10000008.8000000000000000",
+            "T":1635515839000,
+            "f":"10.2600000000000000",
+            "L":"0.0000000000000000",
+            "l":"-10.2600000000000000",
+            "t":1635515839000
+        }
+    ],
+    "u":1090862
+}
+```
+
+**unsubscribe：**
+
+``` 
+{"event":"unsub","params":{"channel":"user_balance_update"}}
+```
+
+**response：**
+
+``` 
+{"channel":"user_balance_update","status":"ok","ts":1623381851178}
+```
+
+##Terminology
+These terms will be used throughout the documentation, so it is recommended especially for new users to read to help their understanding of the API.
+
+base asset refers to the asset that is the quantity of a symbol. For the symbol BTCUSDT, BTC would be the base asset.
+quote asset refers to the asset that is the price of a symbol. For the symbol BTCUSDT, USDT would be the quote asset.
+
+ENUM definitions
+
+`SPOT`
+**balance event :**
+
+Event | 	Description
+
+OutboundAccountPositionEvent  |  ignore 
+
+OutboundAccountPositionTradeEvent | the order has been filled 
+
+OutboundAccountPositionOrderEvent	 | The order place or cancel 
+
+OutboundAccountPositionTransferEvent |	 ignore 
+
+OutboundAccountPositionBonusEvent |  ignore 
+
+
+**order event :**
+
+Event | 	Description
+
+1	 | The order has been created by the user. 
+
+2    | 	The order has been canceled by the user.
+
+3	 |  The order has been filled by the engine .
+
+4   |	The order has been canceled by the engine .
+
+
+**order status :**
+
+status | 	Description
+
+0	 | The order has not been accepted by the engine.
+
+1	 | The order has been accepted by the engine.
+
+2    | 	The order has been completed. 
+
+3	 | A part of the order has been filled.
+
+4   |	The order has been canceled by the user.
