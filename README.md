@@ -1,4 +1,4 @@
-# Public Rest API for Bitrue (2021-10-12)
+# Public Rest API for Bitrue (2021-11-05)
 # General API Information
 * The base endpoint is: **https://openapi.bitrue.com**
 * All endpoints return either a JSON object or array.
@@ -973,6 +973,10 @@ path variable symbol should set symbol ,for example
 }
 ```
 
+
+
+## Deposit & Withdraw (after 2021-10-12)
+
 ### Withdraw commit  (WITHDRAW_DATA)
 
 ```
@@ -1154,7 +1158,7 @@ endTime | NUMBER | NO | End time to query. Timestamp in ms.
 }
 ```
 
-# # User Data Streams 
+# # User Data Streams （after 2021-11-05）
 
 - The base API endpoint is: https://open.bitrue.com
 - USER_STREAM : Security Type, Endpoint requires sending a valid API-Key.
