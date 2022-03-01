@@ -1,4 +1,4 @@
-# Public Rest API for Bitrue (2021-11-05)
+# Public Rest API for Bitrue (2022-03-01)
 # General API Information
 * The base endpoint is: **https://openapi.bitrue.com**
 * All endpoints return either a JSON object or array.
@@ -222,6 +222,29 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 * SECOND
 * MINUTE
 * DAY
+
+## Error Codes
+### Http status 200
+Http status | code  | desc
+----- | ----- | -----
+200   | -2013 | Could not find order information for given order ID.
+200   | -2017 | Could not find net-value for given symbol.
+
+### Http status '4xx'
+Http status | code  | desc
+----- | ----- | ----- 
+412   | -1102 | Mandatory parameter is missing or illegal.
+412   | -1121 | Invalid symbol name given.
+401   | -1022 | Invalid signature or Invalid timestamp or Unauthorized for API.
+412   | -1111 | Invalid volume or price or address given.
+406   | -2010 | Order placement or cancellation or withdrawal rejected.
+405   | -1020 | Method not supported.
+
+### Http status '5xx'
+Http status | code  | desc
+----- | ----- | ----- 
+500   | -1016 | Service unavailable
+503   | 503 | Service unavailable
 
 ## General endpoints
 ### Test connectivity
