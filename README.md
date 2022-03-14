@@ -5,7 +5,7 @@
 * Fixed endpoint `/api/v2/myTrades`
 * Cache optimization
 --------
-# Release Note 2022-03-14
+# Release Note 2022-03-01
 * Descrition for [error code](#error_code).
 * --------
 # General API Information
