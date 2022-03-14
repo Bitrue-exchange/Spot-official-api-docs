@@ -3,6 +3,7 @@
 * Support `originClientOrderId` for [place an order](#place_order) and in [WS data with 'C'](#ws_c).
 * Fixed endpoint `/api/v1/allOrders`
 * Fixed endpoint `/api/v2/myTrades`
+* Add [rate limit policy](#rlp) in response header
 * Cache optimization
 --------
 # Release Note 2022-03-01
@@ -44,6 +45,7 @@
 * When a 429 is recieved, it's your obligation as an API to back off and not spam the API.
 * **Repeatedly violating rate limits and/or failing to back off after receiving 429s will result in an automated IP ban .**
 * IP bans are tracked and **scale in duration** for repeat offenders, **from 2 minutes to 3 days**.
+* <span id="rlp">If you got a 429, you could get the policy name from response header with key `rate_limit_p`.</span>
 
 # Endpoint security type
 * Each endpoint has a security type that determines the how you will
