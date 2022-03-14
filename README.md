@@ -1,11 +1,13 @@
 # Public Rest API for Bitrue (2022-03-14)
 # Release Note 2022-03-14
-* Support `originClientOrderId` for place an order and in WS data with 'C'.
+* Support `originClientOrderId` for [place an order](#place_order) and in [WS data with 'C'](#ws_c).
 * Fixed endpoint `/api/v1/allOrders`
 * Fixed endpoint `/api/v2/myTrades`
-* Add endpoint `/api/v2/account`
 * Cache optimization
 --------
+# Release Note 2022-03-14
+* Descrition for [error code](#error_code).
+* --------
 # General API Information
 * The base endpoint is: **https://openapi.bitrue.com**
 * All endpoints return either a JSON object or array.
@@ -230,7 +232,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 * MINUTE
 * DAY
 
-## Error Codes
+<span id="error_code">## Error Codes</span>
 ### Http status 200
 Http status | code  | desc
 ----- | ----- | -----
@@ -649,7 +651,7 @@ type | ENUM | YES |
 timeInForce | ENUM | NO |
 quantity | DECIMAL | YES |
 price | DECIMAL | NO |
-newClientOrderId | STRING | NO | A unique id for the order. Automatically generated if not sent. 
+<span id="place_order">newClientOrderId</span> | STRING | NO | A unique id for the order. Automatically generated if not sent. 
 stopPrice | DECIMAL | NO |   
 icebergQty | DECIMAL | NO | 
 recvWindow | LONG | NO |
@@ -1344,7 +1346,7 @@ order event :
   "O": 1499405658657,            // Order creation time
   "z": "0.00000000",              // Cumulative filled quantity
   "Y": "0.00000000",             // Cumulative transacted amount (i.e. Price * Qty)
-  "C": "test",                   // Origin client order id
+  <span id="ws_c">"C": "test"</span>,                   // Origin client order id
 }
 ```
 
