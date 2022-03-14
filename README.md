@@ -1,4 +1,11 @@
-# Public Rest API for Bitrue (2022-03-01)
+# Public Rest API for Bitrue (2022-03-14)
+# Release Note 2022-03-14
+* Support `originClientOrderId` for place an order and in WS data with 'C'.
+* Fixed endpoint `/api/v1/allOrders`
+* Fixed endpoint `/api/v2/myTrades`
+* Add endpoint `/api/v2/account`
+* Cache optimization
+--------
 # General API Information
 * The base endpoint is: **https://openapi.bitrue.com**
 * All endpoints return either a JSON object or array.
@@ -1337,6 +1344,7 @@ order event :
   "O": 1499405658657,            // Order creation time
   "z": "0.00000000",              // Cumulative filled quantity
   "Y": "0.00000000",             // Cumulative transacted amount (i.e. Price * Qty)
+  "C": "test",                   // Origin client order id
 }
 ```
 
