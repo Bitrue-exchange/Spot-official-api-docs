@@ -5,10 +5,8 @@
 * Fixed endpoint `/api/v2/myTrades`
 * Add [rate limit policy](#rlp) in response header
 * Cache optimization
---------
 # Release Note 2022-03-01
 * Descrition for [error code](#error_code).
---------
 # General API Information
 * The base endpoint is: **https://openapi.bitrue.com**
 * All endpoints return either a JSON object or array.
