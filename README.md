@@ -1099,6 +1099,7 @@ offset | NUMBER | NO | Which offset to start. Default 0.
 limit | NUMBER | NO | Limit data to query. Default 10. Max 1000.
 startTime | NUMBER | NO | Start time to query. Timestamp in ms. 
 endTime | NUMBER | NO | End time to query. Timestamp in ms.
+timestamp | LONG | YES |
 
 **Notes:**
 
@@ -1151,7 +1152,7 @@ offset | NUMBER | NO | Which offset to start. Default 0.
 limit | NUMBER | NO | Limit data to query. Default 10. Max 1000.
 startTime | NUMBER | NO | Start time to query. Timestamp in ms. 
 endTime | NUMBER | NO | End time to query. Timestamp in ms.
-
+timestamp | LONG | YES |
 
 **Response:**
 
