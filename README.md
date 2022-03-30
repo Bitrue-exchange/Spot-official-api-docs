@@ -1048,6 +1048,7 @@ This method needs the API withdraw privilege and you MUST set limit IP for this 
         "fee": 1,
         "ctime": null,
         "coin": "usdt_erc20",
+        "withdrawId": 1156423,
         "addressTo": "0x2edfae3878d7b6db70ce4abed177ab2636f60c83"
     }
 }
