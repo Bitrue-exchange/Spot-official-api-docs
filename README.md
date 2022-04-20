@@ -295,8 +295,8 @@ NONE
 }
 ```
 
-<span id="exchangeInfo_endpoint">
-### Exchange information （Some fields not support. only reserved）
+### <span id="exchangeInfo_endpoint">
+Exchange information （Some fields not support. only reserved）
 </span>
 ```
 GET /api/v1/exchangeInfo
@@ -840,7 +840,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-### Account information (USER_DATA)
+### <span id="account_endpoint">Account information (USER_DATA)</span>
 ```
 GET /api/v1/account (HMAC SHA256)
 ```
