@@ -1,6 +1,6 @@
 # Public Rest API for Bitrue (2022-03-14)
 # Release Note 2022-04-18
-* Modify privileges for [Account endpoint](#account_endpoint) and some [orders endpoints](#orders_endpoints)
+* Modify privileges for [Account endpoint](#account_endpoint)
 * Modify data for [exchangeInfo endpoint](#exchangeInfo_endpoint)
 # Release Note 2022-03-14
 * Support `originClientOrderId` for [place an order](#place_order) and in [WS data with 'C'](#ws_c).
