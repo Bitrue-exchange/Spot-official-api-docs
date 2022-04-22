@@ -1,4 +1,4 @@
-# Public Rest API for Bitrue (2022-03-14)
+# Public Rest API for Bitrue (2022-04-18)
 # Release Note 2022-04-18
 * Modify privileges for [Account endpoint](#account_endpoint)
 * Modify data for [exchangeInfo endpoint](#exchangeInfo_endpoint)
