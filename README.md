@@ -1328,7 +1328,7 @@ sub success :
 ```
 
 order event :
-
+<span id="ws_c">
 ``` 
 {
   "e": "executionReport",        // Event type
@@ -1353,10 +1353,10 @@ order event :
   "O": 1499405658657,            // Order creation time
   "z": "0.00000000",              // Cumulative filled quantity
   "Y": "0.00000000",             // Cumulative transacted amount (i.e. Price * Qty)
-  <span id="ws_c">"C": "test"</span>,                   // Origin client order id
+  "C": "test",                   // Origin client order id
 }
 ```
-
+</span>
 **unsubscribe：**
 
 ``` 
