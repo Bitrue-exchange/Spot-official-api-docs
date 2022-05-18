@@ -98,7 +98,7 @@ class Bitrue {
 			]
 		];
 		$headers = array('User-Agent: Mozilla/4.0 (compatible; PHP Bitrue API)',
-			'X-MBX-APIKEY: {$this->api_key}',
+			'X-MBX-APIKEY: ' . $this->api_key,
 			'Content-type: application/x-www-form-urlencoded');
 		$context = stream_context_create($opt);
 		$query = http_build_query($params, '', '&');
