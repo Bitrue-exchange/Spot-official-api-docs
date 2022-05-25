@@ -1,4 +1,6 @@
-# Public Rest API for Bitrue (2022-04-18)
+# Public Rest API for Bitrue (2022-05-17)
+# Release Note 2022-05-17
+* Add endpoint for [KLine Data](#kline_endpoint)
 # Release Note 2022-04-18
 * Modify privileges for [Account endpoint](#account_endpoint)
 * Modify data for [exchangeInfo endpoint](#exchangeInfo_endpoint)
@@ -369,6 +371,62 @@ NONE
 ```
 
 ## Market Data endpoints
+### <span id="kline_endpoint">Kline data</span>
+```
+GET /api/v1/market/kline
+```
+**Weight:**
+1
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+symbol | STRING | YES |
+scale| ENUM |YES| 1m / 5m / 15m / 30m / 1H / 2H / 4H / 12H / 1D / 1W|
+fromIdx| NUMBER|NO||
+limit| NUMBER|NO|Max to 1440|
+
+**Response:**
+```json
+{
+    "symbol": "BTCUSDT",
+    "scale": "KLINE_15MIN",
+    "data": [
+        {
+            "i": 1648806300,
+            "a": "3377268.173585",
+            "v": "74.9149",
+            "c": "45079.5",
+            "h": "45161.82",
+            "l": "44995.5",
+            "o": "45065.49"
+        },
+        {
+            "i": 1648807200,
+            "a": "2767084.210586",
+            "v": "61.3727",
+            "c": "45118.48",
+            "h": "45126.03",
+            "l": "45019.8",
+            "o": "45076.49"
+        }
+    ]
+}
+```
+**Field in response:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+i| NUMBER |YES| Timestamp for kline data|
+a| STRING |YES| Trade amount |
+v| STRING |YES| Trade volume|
+c| STRING |YES| Close price|
+h| STRING |YES| High price|
+l| STRING |YES| Low price|
+o| STRING |YES| Open price|
+
+
 ### Order book
 ```
 GET /api/v1/depth
