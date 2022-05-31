@@ -1,4 +1,6 @@
-# Public Rest API for Bitrue (2022-05-17)
+# Public Rest API for Bitrue (2022-05-31)
+# Release Note 2022-05-31
+* Modify rate limits in [ExchangeInfo endpoint](#exchangeInfo_endpoint)
 # Release Note 2022-05-17
 * Add endpoint for [KLine Data](#kline_endpoint)
 # Release Note 2022-04-18
@@ -316,22 +318,83 @@ NONE
 {
   "timezone": "UTC",
   "serverTime": 1508631584636,
-  "rateLimits": [{
-      "rateLimitType": "REQUESTS_WEIGHT",
-      "interval": "MINUTE",
-      "limit": 1200
-    },
-    {
-      "rateLimitType": "ORDERS",
-      "interval": "SECOND",
-      "limit": 10
-    },
-    {
-      "rateLimitType": "ORDERS",
-      "interval": "DAY",
-      "limit": 100000
-    }
-  ],
+  "rateLimits": [
+          {
+              "id": "general",
+              "type": [
+                  "IP"
+              ],
+              "replenishRate": 1200,
+              "burstCapacity": 1200,
+              "timeCount": 1,
+              "timeUnit": "MINUTES",
+              "refreshType": "FIRST_REQUEST",
+              "weight": 1,
+              "dynamicWeight": false,
+              "overrideLevel": false,
+              "dynamicWeightType": null
+          },// That means only allow 1200 weight in 1 minute per IP.
+          {
+              "id": "orders_ip_seconds",
+              "type": [
+                  "IP"
+              ],
+              "replenishRate": 100,
+              "burstCapacity": 100,
+              "timeCount": 60,
+              "timeUnit": "SECONDS",
+              "refreshType": "FIRST_REQUEST",
+              "weight": 1,
+              "dynamicWeight": false,
+              "overrideLevel": true,
+              "dynamicWeightType": null
+          },// That means only allow 100 weight for order endpoints in 60 seconds per IP.
+          {
+              "id": "orders_user_seconds",
+              "type": [
+                  "USER"
+              ],
+              "replenishRate": 100,
+              "burstCapacity": 100,
+              "timeCount": 60,
+              "timeUnit": "SECONDS",
+              "refreshType": "FIRST_REQUEST",
+              "weight": 1,
+              "dynamicWeight": false,
+              "overrideLevel": true,
+              "dynamicWeightType": null
+          },// That means only allow 100 weight for order endpoints in 60 seconds per User.
+          {
+              "id": "withdraw_days",
+              "type": [
+                  "USER"
+              ],
+              "replenishRate": 1000,
+              "burstCapacity": 1000,
+              "timeCount": 1,
+              "timeUnit": "DAYS",
+              "refreshType": "FIRST_REQUEST",
+              "weight": 1,
+              "dynamicWeight": false,
+              "overrideLevel": false,
+              "dynamicWeightType": null
+          },// That means only allow 1000 weight for withdraw endpoints in 1 day per User.
+          {
+              "id": "withdraw_read_hours",
+              "type": [
+                  "USER"
+              ],
+              "replenishRate": 3000,
+              "burstCapacity": 3000,
+              "timeCount": 1,
+              "timeUnit": "HOURS",
+              "refreshType": "FIRST_REQUEST",
+              "weight": 1,
+              "dynamicWeight": false,
+              "overrideLevel": false,
+              "dynamicWeightType": null
+          } // That means only allow 3000 weight for withdraw read endpoints in 1 hour per User.
+      ],
   "exchangeFilters": [],
   "symbols": [{
     "symbol": "ETHBTC",
