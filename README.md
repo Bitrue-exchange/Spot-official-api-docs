@@ -407,19 +407,28 @@ NONE
     "orderTypes": ["LIMIT", "MARKET"],
     "icebergAllowed": false,
     "filters": [{
-      "filterType": "PRICE_FILTER",
-      "minPrice": "0.00000100",
-      "maxPrice": "100000.00000000",
-      "tickSize": "0.00000100"
-    }, {
-      "filterType": "LOT_SIZE",
-      "minQty": "0.00100000",
-      "maxQty": "100000.00000000",
-      "stepSize": "0.00100000"
-    }, {
-      "filterType": "MIN_NOTIONAL",
-      "minNotional": "0.00100000"
-    }]
+                        "filterType": "PRICE_FILTER",
+                        "minPrice": "0.666", // price >= minPrice
+                        "maxPrice": "66.600",// price <= maxPrice
+                        "tickSize": "0.01",  // price % tickSize == 0
+                        "priceScale": 2
+                    },
+                    {
+                        "filterType": "PERCENT_PRICE_BY_SIDE",
+                        "bidMultiplierUp": "1.3",    // Order price <= bidMultiplierUp * lastPrice
+                        "bidMultiplierDown": "0.1",  // Order price >= bidMultiplierDown * lastPrice
+                        "askMultiplierUp": "10.0",   // Order Price <= askMultiplierUp * lastPrice
+                        "askMultiplierDown": "0.7",  // Order Price >= askMultiplierDown * lastPrice
+                        "avgPriceMins": "1"
+                    },
+                    {
+                        "filterType": "LOT_SIZE",
+                        "minQty": "0.1",  // quantity >= minQty
+                        "minVal": "10.0", // quantity * lastPrice >= minVal
+                        "maxQty": "999999999999999", // quantity <= maxQty
+                        "stepSize": "0.01", // (quantity-minQty) % stepSize == 0
+                        "volumeScale": 2
+                    }]
   }],
   "coins": [{
     "coin":"btr",
