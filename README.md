@@ -1,6 +1,7 @@
-# Public Rest API for Bitrue (2022-05-31)
-# Release Note 2022-05-31
+# Public Rest API for Bitrue (2022-06-02)
+# Release Note 2022-06-02
 * Modify rate limits in [ExchangeInfo endpoint](#exchangeInfo_endpoint)
+* Fixed bug
 # Release Note 2022-05-17
 * Add endpoint for [KLine Data](#kline_endpoint)
 # Release Note 2022-04-18
