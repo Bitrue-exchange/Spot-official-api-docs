@@ -1,4 +1,6 @@
-# Public Rest API for Bitrue (2022-06-02)
+# Public Rest API for Bitrue (2022-07-01)
+# Release Note 2022-07-01
+* Update [signature example for HTTP POST](#sign)
 # Release Note 2022-06-02
 * Modify rate limits in [ExchangeInfo endpoint](#exchangeInfo_endpoint)
 * Fixed bug
@@ -70,12 +72,13 @@ MARKET_DATA | Endpoint requires sending a valid API-Key.
 
 # SIGNED (TRADE and USER_DATA) Endpoint security
 * `SIGNED` endpoints require an additional parameter, `signature`, to be
-  sent in the  `query string` or `request body`.
+  sent in the  `query string`.
 * Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation.
   Use your `secretKey` as the key and `totalParams` as the value for the HMAC operation.
 * The `signature` is **not case sensitive**.
 * `totalParams` is defined as the `query string` concatenated with the
   `request body`.
+
 
 ## Timing security
 * A `SIGNED` endpoint also requires a parameter, `timestamp`, to be sent which
@@ -138,16 +141,16 @@ timestamp | 1499827319559
 
     ```
     (HMAC SHA256)
-    [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://www.bitrue.com/api/v1/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
+    [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://openapi.bitrue.com/api/v1/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
     ```
 
-### Example 2: As a request body
-* **requestBody:** symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559
+### <span id="sign">Example 2: As a request body</span>
+* **requestBody:** {"symbol":"LTCBTC","side":"BUY","type":"LIMIT","timeInForce":"GTC","price":0.1,"quantity":1,"timestamp":1499827319559,"recvWindow":5000}
 * **HMAC SHA256 signature:**
 
     ```
-    [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
-    (stdin)= c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71
+    [linux]$ echo -n '{"symbol":"LTCBTC","side":"BUY","type":"LIMIT","timeInForce":"GTC","price":0.1,"quantity":1,"timestamp":1499827319559,"recvWindow":5000}' | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
+    (stdin)= a96755b9616ffcb19b47f38ee1c8e20bb9ff5ffdd3936ace8f457975fbc91a6a
     ```
 
 
@@ -155,29 +158,9 @@ timestamp | 1499827319559
 
     ```
     (HMAC SHA256)
-    [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://www.bitrue.com/api/v1/order' -d 'symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71'
+    [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://openapi.bitrue.com/api/v1/order?signature=a96755b9616ffcb19b47f38ee1c8e20bb9ff5ffdd3936ace8f457975fbc91a6a' -d '{"symbol":"LTCBTC","side":"BUY","type":"LIMIT","timeInForce":"GTC","price":0.1,"quantity":1,"timestamp":1499827319559,"recvWindow":5000}'
     ```
 
-### Example 3: Mixed query string and request body
-* **queryString:** symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC
-* **requestBody:** quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559
-* **HMAC SHA256 signature:**
-
-    ```
-    [linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
-    (stdin)= 0fd168b8ddb4876a0358a8d14d0c9f3da0e9b20c5d52b2a00fcf7d1c602f9a77
-    ```
-
-
-* **curl command:**
-
-    ```
-    (HMAC SHA256)
-    [linux]$ curl -H "X-MBX-APIKEY: vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A" -X POST 'https://www.bitrue.com/api/v1/order?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559&signature=0fd168b8ddb4876a0358a8d14d0c9f3da0e9b20c5d52b2a00fcf7d1c602f9a77'
-    ```
-
-Note that the signature is different in example 3.
-There is no & between "GTC" and "quantity=1".
 
 # Public API Endpoints
 ## Terminology
