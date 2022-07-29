@@ -787,7 +787,8 @@ Type | Additional mandatory parameters
 ```json
 {
   "symbol": "BTCUSDT",
-  "orderId": 28,
+  "orderId": 307650651173648896,
+  "orderIdStr": "307650651173648896",
   "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",
   "transactTime": 1507725176595
 }
