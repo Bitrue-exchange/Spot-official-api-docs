@@ -532,6 +532,7 @@ limit | INT | NO | Default 100; max 1000. Valid limits:[5, 10, 20, 50, 100, 500,
 ```
 GET /api/v1/trades
 ```
+
 Get recent trades (up to last 1000).
 
 **Weight:**
@@ -996,52 +997,6 @@ timestamp | LONG | YES |
   ]
 }
 ```
-
-### Account trade list (USER_DATA)
-```
-GET /api/v1/myTrades  (HMAC SHA256)
-```
-Get trades for a specific account and symbol.
-
-**Weight:**
-5 with symbol;40 when the symbol parameter is omitted
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-symbol | STRING | NO |
-startTime | LONG | NO |
-endTime | LONG | NO |
-fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades.
-limit | INT | NO | Default 100; max 1000.
-recvWindow | LONG | NO |
-timestamp | LONG | YES |
-
-**Notes:**
-* If `fromId` is set, it will get orders >= that `fromId`.
-Otherwise most recent orders are returned.
-
-**Response:**
-```json
-[
-  {
-    "symbol": "BNBBTC",
-    "id": 28457,
-    "orderId": 100234,
-    "price": "4.00000100",
-    "qty": "12.00000000",
-    "commission": "10.10000000",
-    "commissionAsset": "BNB",
-    "time": 1499865549590,
-    "isBuyer": true,
-    "isMaker": false,
-    "isBestMatch": true    
-  }
-]
-```
-
-
 
 ### Account trade list (USER_DATA)
 ```
