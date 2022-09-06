@@ -1,4 +1,6 @@
-# Public Rest API for Bitrue (2022-07-01)
+# Public Rest API for Bitrue (2022-09-06)
+# Release Note 2022-09-06
+* Fixed bugs
 # Release Note 2022-07-01
 * Update [signature example for HTTP POST](#sign)
 # Release Note 2022-06-02
@@ -703,7 +705,7 @@ OR
 ```
 GET /api/v1/ticker/price
 ```
-Latest price for a symbol or symbols.
+Latest price for a symbol.
 
 **Weight:**
 1
@@ -1027,7 +1029,7 @@ Otherwise most recent orders are returned.
 ```json
 [
   {
-    "symbol": "BNBBTC",
+    "symbol": "bnbbtc",
     "id": 28457,
     "orderId": 100234,
     "price": "4.00000100",
