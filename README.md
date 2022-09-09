@@ -1029,7 +1029,7 @@ Otherwise most recent orders are returned.
 ```json
 [
   {
-    "symbol": "bnbbtc",
+    "symbol": "BNBBTC",
     "id": 28457,
     "orderId": 100234,
     "price": "4.00000100",
