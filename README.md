@@ -1269,7 +1269,7 @@ timestamp | LONG | YES |
 }
 ```
 
-# # User Data Streams （after 2021-11-05）
+# # User Data Streams WebSocket（after 2021-11-05）
 
 - The base API endpoint is: https://open.bitrue.com
 - USER_STREAM : Security Type, Endpoint requires sending a valid API-Key.
