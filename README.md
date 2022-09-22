@@ -1312,6 +1312,7 @@ Name | Type | Mandatory | Description
 event | STRING | YES | sub:Subscribe，unsub:Unsubscribe
 cb_id | STRING | YES | Symbol name
 channel | STRING | YES | depth channel will be like `market_${cb_id}_simple_depth_step0`
+
 **Request Example:**
 ```
 {
