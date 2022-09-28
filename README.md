@@ -1275,6 +1275,7 @@ timestamp | LONG | YES |
 - The base websocket endpoint is: wss://ws.bitrue.com/market/ws
 -  One connection can subscribe to multiple data streams at the same time
 -  The subscribed server sends a ping message every 15 seconds.After receiving the ping message, the client side need to return pong within 1 minutes. Otherwise, the connection will be disconnected automatically
+-  You should collect byte type of data and then unzip it with gzip, then convert it into string.
 
 ### Ping/Keep-alive (MARKET_STREAM)
 Example of ping:
