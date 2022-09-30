@@ -1320,7 +1320,7 @@ channel | STRING | YES | depth channel will be like `market_${cb_id}_simple_dept
     "event":"sub",
     "params":{
         "cb_id":"btcusdt",
-        "channel":"market_btcusdt_depth_step0"
+        "channel":"market_btcusdt_simple_depth_step0"
     }
 }
 ```
