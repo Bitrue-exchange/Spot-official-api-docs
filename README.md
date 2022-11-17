@@ -201,7 +201,7 @@ timestamp | 1499827319559
 
 **Time in force:**
 
-* GTT
+* GTC
 
 **Kline/Candlestick chart intervals:**
 
@@ -926,7 +926,7 @@ Get all account orders; active, canceled, or filled.
 Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
 symbol | STRING | YES |
-orderId | LONG | NO |
+fromId | LONG | NO |
 startTime | LONG | NO |
 endTime | LONG | NO |
 limit | INT | NO | Default 100; max 1000.
@@ -934,7 +934,7 @@ recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 **Notes:**
-* If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
+* If `fromId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
 
 **Response:**
 ```json
