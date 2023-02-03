@@ -1281,7 +1281,7 @@ timestamp | LONG | YES |
 Example of ping:
 ```
 {
-    "ping":"1663815268584"	/timestamp
+    "ping":"1663815268584"	//timestamp
 }
 ```
 Example of pong:
