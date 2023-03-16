@@ -1,4 +1,6 @@
-# Public Rest API for Bitrue (2022-09-06)
+# Public Rest API for Bitrue (2023-03-16)
+# Release Note 2023-03-16
+* Update [Kline Data endpoint](#kline_endpoin)
 # Release Note 2022-09-22
 * Add endpoint for [ws_depth](#ws_depth)
 # Release Note 2022-09-06
@@ -455,6 +457,7 @@ limit| NUMBER|NO|Max to 1440|
     "data": [
         {
             "i": 1648806300,
+            "is": 1648806300000,
             "a": "3377268.173585",
             "v": "74.9149",
             "c": "45079.5",
@@ -464,6 +467,7 @@ limit| NUMBER|NO|Max to 1440|
         },
         {
             "i": 1648807200,
+            "is": 1648807200000,
             "a": "2767084.210586",
             "v": "61.3727",
             "c": "45118.48",
