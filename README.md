@@ -1,6 +1,10 @@
-# Public Rest API for Bitrue (2023-03-16)
+# Public Rest API for Bitrue (2023-03-20)
+# Release Note 2023-03-20
+* Fixed bugs
+* Recovery TradeId in WS [Order Event](#ws_c)
+* Add 'tradeId' in endpoint [/v2/myTrades](#v2myTrades)
 # Release Note 2023-03-16
-* Update [Kline Data endpoint](#kline_endpoin)
+* Update [Kline Data endpoint](#kline_endpoint)
 # Release Note 2022-09-22
 * Add endpoint for [ws_depth](#ws_depth)
 # Release Note 2022-09-06
@@ -1010,10 +1014,10 @@ timestamp | LONG | YES |
 ```
 GET /api/v2/myTrades  (HMAC SHA256)
 ```
-Get trades for a specific account and symbol.
+<span id="v2myTrades">Get trades for a specific account and symbol.</span>
 
 **Weight:**
-5 with symbol;40 when the symbol parameter is omitted
+5 with symbol
 
 **Parameters:**
 
@@ -1037,6 +1041,7 @@ Otherwise most recent orders are returned.
   {
     "symbol": "BNBBTC",
     "id": 28457,
+    "tradeId": 28457284572845728, // This is the same as 't' in WS order event.
     "orderId": 100234,
     "price": "4.00000100",
     "qty": "12.00000000",
