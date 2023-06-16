@@ -1523,12 +1523,12 @@ order event :
   "u": 123456,                   // UID
   "s": "ETHBTC",                 // Symbol
   "c": "mUvoqJxFIILMdfAW5iGSOW", // Client order ID
-  "S": "BUY",                    // Side
-  "o": "LIMIT",                  // Order type
+  "S": 1,                    // Side
+  "o": 1,                  // Order type
   "q": "1.00000000",             // Order quantity
   "p": "0.10264410",             // Order price
-  "x": "NEW",                    // order event
-  "X": "NEW",                    // Current order status
+  "x": 1,                    // order event
+  "X": 1,                    // Current order status
   "i": 4293153,                  // Order ID
   "l": "0.00000000",             // Last executed quantity
   "L": "0.00000000",             // Last executed price
@@ -1673,5 +1673,21 @@ status | 	Description
 3	 | A part of the order has been filled.
 
 4   |	The order has been canceled by the user.
- 
+
+**order type :**
+
+type | 	Description
+
+1	 | LIMIT 
+
+2    | MARKET 
+
+
+**order side :**
+
+side | 	Description
+
+1	 | BUY 
+
+2    | SELL 
 
