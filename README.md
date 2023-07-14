@@ -1,4 +1,4 @@
-# Public Rest API for Bitrue (2023-03-20)
+# Public Rest API for Bitrue (2023-07-14)
 # Release Note 2023-07-14
 * Fixed bugs
 * add '[PENDING_CREATE](#pending_create)' status for order
