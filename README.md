@@ -1,6 +1,9 @@
 # Public Rest API for Bitrue (2023-03-20)
 # Release Note 2023-03-20
 * Fixed bugs
+* add '[PENDING_CREATE](#pending_create)' status for order
+# Release Note 2023-03-20
+* Fixed bugs
 * Recovery TradeId in WS [Order Event](#ws_c)
 * Add 'tradeId' in endpoint [/v2/myTrades](#v2myTrades)
 # Release Note 2023-03-16
@@ -187,6 +190,7 @@ timestamp | 1499827319559
 
 **Order status:**
 
+* <span id="pending_create">PENDING_CREATE</span> (means ur order is in queue)
 * NEW
 * PARTIALLY_FILLED
 * FILLED
